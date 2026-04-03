@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-background: #171717;
+  --color-brand-sidebar: #212121;
+  --color-brand-border: #333333;
+  --color-brand-accent: #d97706; /* Amber 600 */
+  --color-brand-text: #ececec;
+  --color-brand-muted: #8e8e8e;
+}
+
+:root {
+  --background: var(--color-brand-background);
+  --foreground: var(--color-brand-text);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-brand-background);
+    color: var(--color-brand-text);
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* Custom Scrollbar for Claude Aesthetic */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Prose-like styling for AI Messages */
+.prose-invert p {
+  margin-bottom: 1rem;
+}
+.prose-invert h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+.prose-invert h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: white;
+}
+.prose-invert ul, .prose-invert ol {
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+}
+.prose-invert li {
+  margin-bottom: 0.5rem;
+}
+.prose-invert strong {
+  font-weight: 700;
+  color: white;
+}
+.prose-invert pre {
+  background: #0a0a0a !important;
+  border-radius: 12px;
+  border: 1px solid #222;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+/* Custom transitions */
+.artifact-transition-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.artifact-transition-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 300ms ease-out;
+}
