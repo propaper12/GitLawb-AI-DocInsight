@@ -1,111 +1,70 @@
-# opencode-gitlawb
+# GitLawb AI (V3 Premium) 🚀
 
-Gitlawb plugin for [OpenCode](https://opencode.ai) — decentralized git tools for AI agents.
+GitLawb AI, **Ollama (Local LLM), Kafka, MinIO ve Qdrant** altyapısı üzerine inşa edilmiş, kurumsal seviyede otonom bir yapay zeka ajanı ve RAG (Retrieval-Augmented Generation) platformudur. Claude V3 hissi veren, ultra premium, cam görünümlü (glassmorphism) modern bir arayüzle kod parçacıklarını ve ajan düşünce (trace) süreçlerini dinamik "Artifact" pencerelerinde gösterir.
 
-## Install
+## 🔥 Öne Çıkan Özellikler (Features)
 
-```json
-{
-  "plugin": ["@gitlawb/opencode"]
-}
+- 🤖 **Otonom Ajan (Autonomous Agent):** Görevleri kendi basamaklarına bölen, düşünen (Thought), aksiyon alan (Action) ve sonuçları gözlemleyen (Observation) akıllı "ReAct" döngüsü mimarisi. Çeşitli plugin ve CLI komutlarını kendi kendine çalıştırabilir.
+- 🧠 **Sıfır Bulut Bağımlılığı (Yerel LLM):** Uygulama tamamen **Ollama** tarafından sunulan `llama3.1` (veya desteklenen diğer modeller) üzerinden çalışır. Veriniz dışarı çıkmaz.
+- 🗄️ **Kurumsal RAG Veri Hattı (Data Pipeline):**
+  - **MinIO:** Evrensel dosya alımı (PDF, TXT, CSV) ve obje depolama (Object Storage).
+  - **Kafka Streams:** Dosyaların yüklenmesi ve asenkron veri akışının sağlanması.
+  - **Qdrant:** Dinamik vektör veritabanı ile (KNN algoritması vs.) metinlerin parçalanıp (1500 chars, 200 overlap chunking strategy) anında yapay zekaya bağlam (context) olarak sunulması.
+- 🎨 **Claude V3 Stili Premium Arayüz:** Next.js 15, Framer Motion, Tailwind CSS kullanılarak geliştirilmiş muazzam animasyonlu, akıcı bir arayüz.
+- 💻 **Artifact Teknolojisi:** AI'nin yazdığı kodları bağımsız çalıştırılabilir gibi sağ panelde sunan gelişmiş "Code Artifact" paneli sistemi ve ajanın adım adım iş akışını gösteren "Agent Live Trace" izleme ekranı.
+
+## 🛠️ Kullanılan Teknolojiler (Tech Stack)
+
+* **Önyüz (Frontend):** Next.js (App Router), React 19, TailwindCSS, Framer Motion, Lucide React, React Markdown, React Syntax Highlighter.
+* **Arkayüz (Backend) ve Veri (Data):** Node.js API Routes, KafkaJS (Streaming), MinIO (Blob Storage), Qdrant (Vector DB).
+* **Yapay Zeka (AI Agent):** Ollama, OpenCode Eklenti Altyapısı (`@opencode-ai/plugin`).
+
+## ⚙️ Kurulum ve Çalıştırma (Getting Started)
+
+### Gereksinimler
+- Node.js (v20+)
+- Docker & Docker Compose (MinIO, Kafka ve Qdrant servisleri için)
+- Ollama (ve sistemde yüklü `llama3.1` modeli -> `ollama run llama3.1`)
+
+### 1. Projeyi Klonlayın ve Bağımlılıkları Yükleyin
+
+```bash
+# Proje ana dizinindeyken
+npm install
+
+# Client tarafındaki bağımlılıkları da yükleyin
+cd client
+npm install
 ```
 
-Add to your `opencode.json`. The plugin is auto-installed via npm.
+### 2. Altyapıyı Çalıştırın (Kafka, MinIO, Qdrant)
 
-## Requirements
-
-- [gitlawb CLI](https://gitlawb.com/install.sh) installed (`gl` in PATH or set `GITLAWB_CLI` env)
-- A gitlawb identity (`gl identity new && gl register`)
-
-## Tools
-
-### Identity & Status
-
-| Tool | Description |
-|------|-------------|
-| `gitlawb_whoami` | Show current identity (DID, name, node) |
-| `gitlawb_doctor` | Health check — identity, node, git config |
-| `gitlawb_status` | Repo sync status |
-
-### Repositories
-
-| Tool | Description |
-|------|-------------|
-| `gitlawb_repo_create` | Create a new repo |
-| `gitlawb_repo_info` | Get repo metadata |
-| `gitlawb_repo_commits` | List recent commits |
-| `gitlawb_repo_owner` | Get repo owner DID |
-
-### Pull Requests
-
-| Tool | Description |
-|------|-------------|
-| `gitlawb_pr_create` | Open a PR |
-| `gitlawb_pr_review` | Review/approve a PR |
-| `gitlawb_pr_merge` | Merge a PR |
-
-### Bounties
-
-| Tool | Description |
-|------|-------------|
-| `gitlawb_bounty_create` | Post a bounty (tokens escrowed on-chain) |
-| `gitlawb_bounty_list` | List bounties (filter by repo/status) |
-| `gitlawb_bounty_show` | Show bounty details |
-| `gitlawb_bounty_claim` | Claim an open bounty |
-| `gitlawb_bounty_submit` | Submit a PR as completion |
-| `gitlawb_bounty_stats` | Marketplace stats & leaderboard |
-
-### Agents
-
-| Tool | Description |
-|------|-------------|
-| `gitlawb_agent_list` | List registered agents |
-
-## Configuration
-
-Pass options via `opencode.json`:
-
-```json
-{
-  "plugin": [
-    ["@gitlawb/opencode", {
-      "nodeUrl": "https://node.gitlawb.com"
-    }]
-  ]
-}
+Ana dizinde bulunan `docker-compose.yml` dosyası aracılığıyla veri hattını başlatın:
+```bash
+docker-compose up -d
 ```
 
-### Environment Variables
+### 3. Ajanı ve Arayüzü Başlatın
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `GITLAWB_NODE` | `https://node.gitlawb.com` | Node URL |
-| `GITLAWB_CLI` | `gl` | Path to gitlawb CLI binary |
-
-## How It Works
-
-The plugin wraps the `gl` CLI as OpenCode tools. When an agent calls `gitlawb_bounty_claim`, it runs `gl bounty claim <id>` under the hood — using the identity at `~/.gitlawb/identity.pem` to sign requests.
-
-The `shell.env` hook auto-injects `GITLAWB_NODE` into every shell command so git push/pull targets the right node.
-
-## Example Agent Workflow
-
-```
-Agent: I'll check for open bounties on this repo.
-→ gitlawb_bounty_list(repo: "owner/repo", status: "open")
-
-Agent: I'll claim bounty #42 and fix the bug.
-→ gitlawb_bounty_claim(id: "42")
-
-Agent: [writes code, commits, pushes]
-
-Agent: Creating a PR for the fix.
-→ gitlawb_pr_create(repo: "repo", head: "fix/bug", title: "Fix login timeout")
-
-Agent: Submitting PR against the bounty.
-→ gitlawb_bounty_submit(id: "42", pr: "1")
+Eğer sadece CLI tabanlı Otonom Ajan testini yapmak isterseniz:
+```bash
+npm run start:agent
 ```
 
-## License
+Next.js İstemcisini (Görsel Arayüz, Chatbot, Veri Yönetimi) başlatmak için ana dizinden:
+```bash
+npm run start:client
+```
+*(Uygulama `http://localhost:3000` adresinde yayına girecektir.)*
 
-MIT
+## 🏗️ Proje Yapısı
+
+* `/client`: Next.js tabanlı ana web uygulaması. Chat, artifacts, pipeline arayüzlerini içerir.
+  * `/client/src/app/page.tsx`: Uygulamanın merkezi UI orchestrator'ı (Claude-style arayüz).
+* `/src/index.ts`: OpenCode Gitlawb sistem plugin entegrasyonu. Ajanın otonom çalıştırdığı terminal/git komutlarını barındırır.
+* `agent_runner.ts`: Yapay zekanın "Tool Calling" ve "ReAct" döngülerini kurduğumuz asıl test script'i.
+* `docker-compose.yml`: Bütün kurumsal veri omurga bileşenleri.
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında açık kaynaklıdır (Ayrıntılar için LICENSE dosyasına bakabilirsiniz).
