@@ -68,3 +68,10 @@ npm run start:client
 ## 📄 Lisans
 
 Bu proje MIT lisansı altında açık kaynaklıdır (Ayrıntılar için LICENSE dosyasına bakabilirsiniz).
+
+<img width="2787" height="1518" alt="Ekran görüntüsü 2026-04-04 000038" src="https://github.com/user-attachments/assets/4b29e4a9-8b32-4c87-9cb3-b2fb68ec445c" />
+<img width="2792" height="1535" alt="Ekran görüntüsü 2026-04-04 000052" src="https://github.com/user-attachments/assets/edde5551-5105-4b7b-b7ce-de96a157c233" />
+<img width="2761" height="1542" alt="Ekran görüntüsü 2026-04-04 000111" src="https://github.com/user-attachments/assets/e75b8294-574f-4f22-9b9a-23e45bba6f9e" />
+<img width="2784" height="1531" alt="Ekran görüntüsü 2026-04-04 000122" src="https://github.com/user-attachments/assets/f78ee9f6-7a5e-402b-a3ce-11a87053490b" />
+<img width="2783" height="1539" alt="Ekran görüntüsü 2026-04-04 000214" src="https://github.com/user-attachments/assets/b10dedbc-3e35-4988-a2ec-90b42ed2752b" />
+<img width="2795" height="1523" alt="Ekran görüntüsü 2026-04-04 000018" src="https://github.com/user-attachments/assets/0b6683eb-a408-41b2-845e-b928c2641b08" />
