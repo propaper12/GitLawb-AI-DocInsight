@@ -1,4 +1,4 @@
-# GitLawb AI (V3 Premium) 🚀
+# GitLawb AI 🚀
 
 GitLawb AI, **Ollama (Local LLM), Kafka, MinIO ve Qdrant** altyapısı üzerine inşa edilmiş, kurumsal seviyede otonom bir yapay zeka ajanı ve RAG (Retrieval-Augmented Generation) platformudur. Claude V3 hissi veren, ultra premium, cam görünümlü (glassmorphism) modern bir arayüzle kod parçacıklarını ve ajan düşünce (trace) süreçlerini dinamik "Artifact" pencerelerinde gösterir.
 
